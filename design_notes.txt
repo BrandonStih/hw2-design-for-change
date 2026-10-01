@@ -1,0 +1,20 @@
+The customer wants these changes as part of a refactor to dragon daycare:
+
+-recommendation overhaul following a priority chain: FEED NOW > REST > OFFER SNACK > ALL CLEAR
+-maintain general integrity across update, ensure existing features are not changed in any way.
+-Tests for care board recommendations, priority cases, preservations of existing behavior, and behavior stability.
+
+Things to be maintained:
+-Current care rules and mood, code just needs to be clean.
+-View presentation is fine as is, just needs to match customer changes.
+-Dragon attributes: name, hunger, energy, mood
+-overall methods and classes, in order to keep backwards compatibility in the future.
+
+Current Design problems/risks:
+-Banner text has some odd cases, and priority doesn't match current customer needs. Rest should take priority over snack.
+-Mood should not be tied to feed method, should exist within dragon and update separately.
+
+Proposition:
+Introduce a new recommendation status that updates to show puff's care recommendation. Do this by creating a 
+new update_dragon method that can be called every feed. It changes mood and caps hunger/energy based on how much puff was fed.
+This way feed() is isolated to just the hunger stat, and future code can make use of the same functionality.
